@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-               BuildableName = "ReactNativeArchitectureTS.app"
-               BlueprintName = "ReactNativeArchitectureTS"
-               ReferencedContainer = "container:ReactNativeArchitectureTS.xcodeproj">
+               BuildableName = "ColorHarmony.app"
+               BlueprintName = "ColorHarmony"
+               ReferencedContainer = "container:ColorHarmony.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "00E356ED1AD99517003FC87E"
-               BuildableName = "ReactNativeArchitectureTSTests.xctest"
-               BlueprintName = "ReactNativeArchitectureTSTests"
-               ReferencedContainer = "container:ReactNativeArchitectureTS.xcodeproj">
+               BuildableName = "ColorHarmonyTests.xctest"
+               BlueprintName = "ColorHarmonyTests"
+               ReferencedContainer = "container:ColorHarmony.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -55,9 +55,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "ReactNativeArchitectureTS.app"
-            BlueprintName = "ReactNativeArchitectureTS"
-            ReferencedContainer = "container:ReactNativeArchitectureTS.xcodeproj">
+            BuildableName = "ColorHarmony.app"
+            BlueprintName = "ColorHarmony"
+            ReferencedContainer = "container:ColorHarmony.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -72,9 +72,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "ReactNativeArchitectureTS.app"
-            BlueprintName = "ReactNativeArchitectureTS"
-            ReferencedContainer = "container:ReactNativeArchitectureTS.xcodeproj">
+            BuildableName = "ColorHarmony.app"
+            BlueprintName = "ColorHarmony"
+            ReferencedContainer = "container:ColorHarmony.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
