@@ -3,7 +3,7 @@ import { makeStyles } from '../../providers/Theme';
 
 interface Props {
   position: 'br' | 'bl' | 'tl' | 'tr';
-  color: 'primary' | 'secondary' | 'danger' | 'success';
+  color: 'primary' | 'danger' | 'success';
   variant: 'outlined' | 'filled';
   disabled: boolean;
 }
@@ -26,23 +26,21 @@ export const useStyles = makeStyles(
         justifyContent: 'center',
         backgroundColor:
           variant === 'outlined'
-            ? theme.palette.background[100]
+            ? theme.palette.background
             : disabled
-            ? theme.palette.greys[500]
-            : theme.palette[color][500],
-        borderColor: disabled
-          ? theme.palette.greys[500]
-          : theme.palette[color][500],
+            ? theme.palette.grey
+            : theme.palette[color],
+        borderColor: disabled ? theme.palette.grey : theme.palette[color],
         borderWidth: 2,
         ...theme.shadows[4],
       },
       icon: {
         color:
           variant === 'filled'
-            ? theme.palette.text.button
+            ? theme.palette.text
             : disabled
-            ? theme.palette.greys[500]
-            : theme.palette[color][500],
+            ? theme.palette.grey
+            : theme.palette[color],
       },
     }),
 );

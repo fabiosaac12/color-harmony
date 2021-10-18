@@ -2,7 +2,7 @@ import { StyleSheet } from 'react-native';
 import { makeStyles } from '../../providers/Theme';
 
 type Props = {
-  color: 'primary' | 'secondary' | 'danger' | 'success';
+  color: 'primary' | 'danger' | 'success';
   variant: 'outlined' | 'filled';
   disabled?: boolean;
 };
@@ -22,21 +22,19 @@ export const useStyles = makeStyles(
         backgroundColor:
           variant === 'filled'
             ? disabled
-              ? theme.palette.greys[500]
-              : theme.palette[color][500]
+              ? theme.palette.grey
+              : theme.palette[color]
             : '#00000000',
-        borderColor: disabled
-          ? theme.palette.greys[500]
-          : theme.palette[color][500],
+        borderColor: disabled ? theme.palette.grey : theme.palette[color],
         borderWidth: 2,
       },
       text: {
         color:
           variant === 'filled'
-            ? theme.palette.text.button
+            ? theme.palette.text
             : disabled
-            ? theme.palette.greys[500]
-            : theme.palette[color][500],
+            ? theme.palette.grey
+            : theme.palette[color],
       },
     }),
 );

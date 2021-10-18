@@ -2,7 +2,7 @@ import { StyleSheet } from 'react-native';
 import { makeStyles } from '../../providers/Theme';
 
 interface Props {
-  variant: 'primary' | 'secondary' | 'danger' | 'success';
+  variant: 'primary' | 'danger' | 'success';
 }
 
 export const useStyles = makeStyles((theme, { variant }: Props) =>
@@ -14,8 +14,8 @@ export const useStyles = makeStyles((theme, { variant }: Props) =>
       textAlign: 'center',
       color:
         theme.name === 'light'
-          ? theme.palette[variant][800]
-          : theme.palette[variant][200],
+          ? theme.palette[variant]
+          : theme.palette[variant],
       marginBottom: 15,
     },
   }),

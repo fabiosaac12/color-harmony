@@ -24,14 +24,14 @@ export const MainStackNavigator = () => {
       <Stack.Navigator
         screenOptions={{
           contentStyle: {
-            backgroundColor: theme.palette.background[100],
+            backgroundColor: theme.palette.background,
           },
           headerShadowVisible: false,
-          headerStyle: { backgroundColor: theme.palette.background[100] },
+          headerStyle: { backgroundColor: theme.palette.background },
           headerTitleStyle: {
             fontSize: 21,
           },
-          headerTintColor: theme.palette.primary[500],
+          headerTintColor: theme.palette.text,
           orientation: 'portrait_up',
         }}
       >
@@ -39,6 +39,7 @@ export const MainStackNavigator = () => {
           name="home"
           component={HomeScreen}
           options={{
+            headerShown: false,
             title: 'RN Architecture TS',
             headerTitleStyle: {
               fontSize: 28,
