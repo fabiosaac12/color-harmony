@@ -1,7 +1,7 @@
+import { HSLInput } from 'components/HSLInput';
 import { useTheme } from 'providers/Theme';
 import React, { FC } from 'react';
 import { TouchableOpacity } from 'react-native';
-import { Text } from '../../components/Text';
 import { withLayout } from '../../hoc';
 import { useMessages } from './HomeScreenMessages';
 import { useStyles } from './HomeScreenStyles';
@@ -12,10 +12,12 @@ export const HomeScreen: FC = withLayout(() => {
   const { generateTheme } = useTheme();
 
   return (
-    <TouchableOpacity onPress={generateTheme} style={styles.container}>
-      <Text variant="title" color="secondary">
-        {messages.greeting}
-      </Text>
+    <TouchableOpacity
+      activeOpacity={1}
+      onPress={generateTheme}
+      style={styles.container}
+    >
+      <HSLInput />
     </TouchableOpacity>
   );
 });

@@ -19,8 +19,6 @@ export const navigationContainerRef =
 export const MainStackNavigator = () => {
   const { theme } = useTheme();
 
-  console.log(theme.palette);
-
   return (
     <NavigationContainer ref={navigationContainerRef}>
       <Stack.Navigator

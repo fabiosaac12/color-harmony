@@ -1,7 +1,8 @@
 import { TextStyle } from 'react-native';
+import { AvailableThemes } from './AvailableThemes';
 
 export interface Theme {
-  name: string;
+  name: AvailableThemes;
   spacing: (n?: number) => number;
   radius: (n?: number) => number;
   text: {

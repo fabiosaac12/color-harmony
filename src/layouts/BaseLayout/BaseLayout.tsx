@@ -1,5 +1,5 @@
 import React from 'react';
-import { View } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { Loader } from '../../components/Loader';
 import { Modal } from '../../components/Modal';
 import { useStyles } from './BaseLayoutStyles';
@@ -11,7 +11,7 @@ export const BaseLayout: React.FC = ({ children }) => {
     <>
       <Modal />
       <Loader />
-      <View style={style.layout}>{children}</View>
+      <SafeAreaView style={style.layout}>{children}</SafeAreaView>
     </>
   );
 };
