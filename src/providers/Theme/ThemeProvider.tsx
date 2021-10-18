@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import { Appearance, AppState, StatusBar } from 'react-native';
-import { getItem, removeItem, setItem } from '../../helpers/localStorage';
+import { getRandomInt } from 'providers/Theme/helpers/getRandomInt';
+import React, { useState } from 'react';
+import { Appearance, StatusBar } from 'react-native';
 import { AvailableThemes } from './models/AvailableThemes';
+import { Theme } from './models/Theme';
 import { ThemeContext, ThemeContextProps } from './ThemeContext';
 import { themes } from './themes';
 
@@ -13,40 +14,34 @@ export const ThemeProvider: React.FC<Props> = ({
   children,
   defaultTheme = 'light',
 }) => {
-  const [themeName, setThemeName] = useState<AvailableThemes>(
-    Appearance.getColorScheme() || defaultTheme,
+  const [theme, setTheme] = useState<Theme>(
+    themes[Appearance.getColorScheme() || defaultTheme],
   );
 
-  useEffect(() => {
-    (async () => {
-      const storedThemeName = await getItem<AvailableThemes>('theme');
-      storedThemeName && setThemeName(storedThemeName);
-    })();
+  const generateTheme = () => {
+    const h = getRandomInt(0, 360);
+    const s = getRandomInt(0, 100);
+    const l = getRandomInt(0, 100);
 
-    AppState.addEventListener('change', async (state) => {
-      if (state === 'active') {
-        const storedThemeName = await getItem<AvailableThemes>('theme');
+    const randomColor = `hsl(${h}, ${s}%, ${l}%)`;
 
-        !storedThemeName &&
-          setThemeName(Appearance.getColorScheme() || themeName);
-      }
-    });
-  }, []);
+    const contrastText = l > 70 ? '#000000' : '#ffffff';
 
-  const changeTheme = (themeName: AvailableThemes) => {
-    const phoneThemeName = Appearance.getColorScheme();
-
-    setThemeName(themeName);
-
-    phoneThemeName === themeName
-      ? removeItem('theme')
-      : setItem('theme', themeName);
+    setTheme((theme) => ({
+      ...theme,
+      name: l > 70 ? 'light' : 'dark',
+      palette: {
+        ...theme.palette,
+        primary: randomColor,
+        background: randomColor,
+        text: contrastText,
+      },
+    }));
   };
 
   const contextValue: ThemeContextProps = {
-    themeName,
-    theme: themes[themeName],
-    changeTheme,
+    theme,
+    generateTheme,
   };
 
   return (
@@ -55,7 +50,7 @@ export const ThemeProvider: React.FC<Props> = ({
         animated
         translucent
         backgroundColor="transparent"
-        barStyle={themeName === 'dark' ? 'light-content' : 'dark-content'}
+        barStyle={theme.name === 'dark' ? 'light-content' : 'dark-content'}
       />
       {children}
     </ThemeContext.Provider>

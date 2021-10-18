@@ -1,11 +1,10 @@
 import { createContext } from 'react';
+import { AvailableThemes } from './models/AvailableThemes';
 import { Theme } from './models/Theme';
-import { themes } from './themes';
 
 export interface ThemeContextProps {
-  themeName: keyof typeof themes;
   theme: Theme;
-  changeTheme: (name: keyof typeof themes) => void;
+  generateTheme: () => void;
 }
 
 export const ThemeContext = createContext<ThemeContextProps>(
