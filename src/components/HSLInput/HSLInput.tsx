@@ -61,7 +61,7 @@ export const HSLInput = () => {
       </View>
 
       {sliders.map(({ icon, item }) => (
-        <View style={styles.sliderContainer}>
+        <View key={`${item}-slider`} style={styles.sliderContainer}>
           <Icon name={icon} size={25} style={styles.sliderIcon} />
           <Slider
             style={styles.slider}

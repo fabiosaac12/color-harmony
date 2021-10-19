@@ -24,6 +24,7 @@ export const useStyles = makeStyles((theme) =>
       flexDirection: 'row',
       justifyContent: 'center',
       alignItems: 'center',
+      marginBottom: theme.spacing(),
     },
     slider: {
       width: window.width * 0.8,

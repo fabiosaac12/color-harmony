@@ -43,7 +43,7 @@ export const ColorHarmony: FC = () => {
   return harmonies ? (
     <View>
       <FlatList
-        style={styles.flatList}
+        contentContainerStyle={styles.flatList}
         keyExtractor={(item) => `${item}Tab`}
         showsHorizontalScrollIndicator={false}
         data={availableHarmonies}
@@ -58,7 +58,7 @@ export const ColorHarmony: FC = () => {
         )}
       />
       <FlatList
-        style={styles.flatList}
+        contentContainerStyle={styles.flatList}
         horizontal
         keyExtractor={({ h, s, l }, index) =>
           `${h}-${s}-${l}-${index}-harmony-color`
