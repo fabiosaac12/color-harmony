@@ -27,10 +27,11 @@ export const HSLInput = () => {
   ];
 
   return (
-    <View style={styles.container}>
+    <View>
       <View style={styles.buttonsContainer}>
         {values.map((value) => (
           <TouchableOpacity
+            key={`${value.name}-button`}
             activeOpacity={0.9}
             onLongPress={() =>
               handleSetHsl({

@@ -4,7 +4,7 @@ import { useStyles } from './ButtonStyles';
 import { Text } from '../Text/Text';
 
 interface Props extends TouchableOpacityProps {
-  color?: 'primary' | 'secondary' | 'danger' | 'success';
+  color?: 'primary' | 'text' | 'danger' | 'success';
   title?: string;
   variant?: 'outlined' | 'filled';
 }

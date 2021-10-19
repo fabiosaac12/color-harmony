@@ -1,3 +1,4 @@
+import { ColorHarmony } from 'components/ColorHarmony';
 import { HSLInput } from 'components/HSLInput';
 import { useTheme } from 'providers/Theme';
 import React, { FC } from 'react';
@@ -18,6 +19,7 @@ export const HomeScreen: FC = withLayout(() => {
       style={styles.container}
     >
       <HSLInput />
+      <ColorHarmony />
     </TouchableOpacity>
   );
 });

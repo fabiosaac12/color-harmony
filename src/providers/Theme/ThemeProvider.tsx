@@ -2,7 +2,7 @@ import { getRandomInt } from 'providers/Theme/helpers/getRandomInt';
 import React, { useEffect, useState } from 'react';
 import { Appearance, StatusBar } from 'react-native';
 import { AvailableThemes } from './models/AvailableThemes';
-import { HSL } from './models/HSL';
+import { HSLValue } from './models/HSLValue';
 import { Theme } from './models/Theme';
 import { ThemeContext, ThemeContextProps } from './ThemeContext';
 import { themes } from './themes';
@@ -18,7 +18,7 @@ export const ThemeProvider: React.FC<Props> = ({
   const [theme, setTheme] = useState<Theme>(
     themes[Appearance.getColorScheme() || defaultTheme],
   );
-  const [hsl, setHsl] = useState<HSL>({
+  const [hsl, setHsl] = useState<HSLValue>({
     h: { value: 0, locked: false },
     s: { value: 0, locked: false },
     l: { value: theme.name === 'light' ? 99 : 11, locked: false },
@@ -43,7 +43,7 @@ export const ThemeProvider: React.FC<Props> = ({
     }));
   }, [hsl]);
 
-  const handleSetHsl = ({ h, s, l }: Partial<HSL>) => {
+  const handleSetHsl = ({ h, s, l }: Partial<HSLValue>) => {
     setHsl(({ h: _h, s: _s, l: _l }) => ({
       h: h ?? _h,
       s: s ?? _s,

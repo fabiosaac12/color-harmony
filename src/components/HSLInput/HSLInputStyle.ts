@@ -5,7 +5,6 @@ const window = Dimensions.get('window');
 
 export const useStyles = makeStyles((theme) =>
   StyleSheet.create({
-    container: {},
     buttonsContainer: {
       flexDirection: 'row',
       justifyContent: 'space-around',

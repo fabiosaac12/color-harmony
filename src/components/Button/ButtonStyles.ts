@@ -2,7 +2,7 @@ import { StyleSheet } from 'react-native';
 import { makeStyles } from '../../providers/Theme';
 
 type Props = {
-  color: 'primary' | 'danger' | 'success';
+  color: 'primary' | 'danger' | 'success' | 'text';
   variant: 'outlined' | 'filled';
   disabled?: boolean;
 };
@@ -31,7 +31,9 @@ export const useStyles = makeStyles(
       text: {
         color:
           variant === 'filled'
-            ? theme.palette.text
+            ? color === 'text'
+              ? theme.palette.background
+              : theme.palette.text
             : disabled
             ? theme.palette.grey
             : theme.palette[color],
