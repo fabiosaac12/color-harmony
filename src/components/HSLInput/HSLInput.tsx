@@ -6,17 +6,26 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import Slider from '@react-native-community/slider';
 import { useStyles } from './HSLInputStyle';
 import { Values } from './models/Values';
+import { HSLLetters } from './models/HSLLetters';
 
-const icons = {
-  h: 'color-filter-outline',
-  s: 'contrast',
-  l: 'sunny',
-};
+const sliders: { item: HSLLetters; icon: string }[] = [
+  {
+    item: 'h',
+    icon: 'color-filter-outline',
+  },
+  {
+    item: 's',
+    icon: 'contrast',
+  },
+  {
+    item: 'l',
+    icon: 'sunny',
+  },
+];
 
 export const HSLInput = () => {
   const styles = useStyles();
   const { theme } = useTheme();
-  const [sliderFor, setSliderFor] = useState<'h' | 's' | 'l'>('h');
 
   const { hsl, handleSetHsl } = useTheme();
 
@@ -33,13 +42,12 @@ export const HSLInput = () => {
           <TouchableOpacity
             key={`${value.name}-button`}
             activeOpacity={0.9}
-            onLongPress={() =>
+            onPress={() =>
               handleSetHsl({
                 [value.name]: { value: value.value, locked: !value.locked },
               })
             }
             style={styles.button}
-            onPress={() => setSliderFor(value.name)}
           >
             <Icon name={value.icon} size={40} style={styles.buttonIcon} />
             <Text variant="button">{value.value}</Text>
@@ -51,23 +59,26 @@ export const HSLInput = () => {
           </TouchableOpacity>
         ))}
       </View>
-      <View style={styles.sliderContainer}>
-        <Icon name={icons[sliderFor]} size={25} style={styles.sliderIcon} />
-        <Slider
-          style={styles.slider}
-          onValueChange={(value) =>
-            handleSetHsl({
-              [sliderFor]: { value: Math.round(value), locked: false },
-            })
-          }
-          thumbTintColor={theme.palette.text}
-          minimumTrackTintColor={theme.palette.text}
-          maximumTrackTintColor={theme.palette.text}
-          value={hsl[sliderFor].value}
-          minimumValue={0}
-          maximumValue={sliderFor === 'h' ? 360 : 100}
-        />
-      </View>
+
+      {sliders.map(({ icon, item }) => (
+        <View style={styles.sliderContainer}>
+          <Icon name={icon} size={25} style={styles.sliderIcon} />
+          <Slider
+            style={styles.slider}
+            onValueChange={(value) =>
+              handleSetHsl({
+                [item]: { value: Math.round(value), locked: false },
+              })
+            }
+            thumbTintColor={theme.palette.text}
+            minimumTrackTintColor={theme.palette.text}
+            maximumTrackTintColor={theme.palette.text}
+            value={hsl[item].value}
+            minimumValue={0}
+            maximumValue={item === 'h' ? 360 : 100}
+          />
+        </View>
+      ))}
     </View>
   );
 };
