@@ -6,7 +6,8 @@ export interface ThemeContextProps {
   theme: Theme;
   generateTheme: () => void;
   hsl: HSLValue;
-  handleSetHsl: ({ h, s, l }: Partial<HSLValue>) => void;
+  handleSetHsl: ({ h, s, l }: Partial<HSLValue>) => HSLValue;
+  addGenerateThemeCallback: (callback: (hsl: HSLValue) => void) => void;
 }
 
 export const ThemeContext = createContext<ThemeContextProps>(

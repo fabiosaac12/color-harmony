@@ -1,8 +1,8 @@
 import { getItem, setItem } from 'helpers/localStorage';
 import { useDidUpdateEffect } from 'hooks/useDidUpdateEffect';
-import { getRandomInt } from 'providers/Theme/helpers/getRandomInt';
 import React, { useEffect, useState } from 'react';
 import { Appearance, StatusBar } from 'react-native';
+import { useThemeGenerator } from './hooks/useThemeGenerator';
 import { AvailableThemes } from './models/AvailableThemes';
 import { HSLValue } from './models/HSLValue';
 import { Theme } from './models/Theme';
@@ -24,6 +24,25 @@ export const ThemeProvider: React.FC<Props> = ({
     h: { value: 0, locked: false },
     s: { value: 0, locked: false },
     l: { value: theme.name === 'light' ? 99 : 11, locked: false },
+  });
+
+  const handleSetHsl = ({ h, s, l }: Partial<HSLValue>): HSLValue => {
+    const { h: _h, s: _s, l: _l } = hsl;
+
+    const newHsl = {
+      h: h ?? _h,
+      s: s ?? _s,
+      l: l ?? _l,
+    };
+
+    setHsl(newHsl);
+
+    return newHsl;
+  };
+
+  const { addGenerateThemeCallback, generateTheme } = useThemeGenerator({
+    handleSetHsl,
+    hsl,
   });
 
   useEffect(() => {
@@ -55,31 +74,12 @@ export const ThemeProvider: React.FC<Props> = ({
     }));
   }, [hsl]);
 
-  const handleSetHsl = ({ h, s, l }: Partial<HSLValue>) => {
-    setHsl(({ h: _h, s: _s, l: _l }) => ({
-      h: h ?? _h,
-      s: s ?? _s,
-      l: l ?? _l,
-    }));
-  };
-
-  const generateTheme = () => {
-    const h = getRandomInt(0, 360);
-    const s = getRandomInt(0, 100);
-    const l = getRandomInt(0, 100);
-
-    handleSetHsl({
-      h: hsl.h.locked ? undefined : { value: h, locked: false },
-      s: hsl.s.locked ? undefined : { value: s, locked: false },
-      l: hsl.l.locked ? undefined : { value: l, locked: false },
-    });
-  };
-
   const contextValue: ThemeContextProps = {
     theme,
     generateTheme,
     handleSetHsl,
     hsl,
+    addGenerateThemeCallback,
   };
 
   return (

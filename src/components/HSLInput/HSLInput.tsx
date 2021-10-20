@@ -1,12 +1,14 @@
 import { Text } from 'components/Text';
 import { themes, useTheme } from 'providers/Theme';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { TouchableOpacity, View } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Slider from '@react-native-community/slider';
 import { useStyles } from './HSLInputStyle';
 import { Values } from './models/Values';
 import { HSLLetters } from './models/HSLLetters';
+import { HSLValue } from 'providers/Theme/models/HSLValue';
+import { useDidUpdateEffect } from 'hooks/useDidUpdateEffect';
 
 const sliders: { item: HSLLetters; icon: string }[] = [
   {
@@ -27,7 +29,12 @@ export const HSLInput = () => {
   const styles = useStyles();
   const { theme } = useTheme();
 
-  const { hsl, handleSetHsl } = useTheme();
+  const { hsl, handleSetHsl, addGenerateThemeCallback } = useTheme();
+  const [innerHsl, setInnerHsl] = useState<HSLValue>(hsl);
+
+  useEffect(() => {
+    addGenerateThemeCallback((hsl) => setInnerHsl(hsl));
+  }, []);
 
   const values: Values = [
     { ...hsl.h, icon: 'color-filter-outline', name: 'h' },
@@ -64,6 +71,7 @@ export const HSLInput = () => {
         <View key={`${item}-slider`} style={styles.sliderContainer}>
           <Icon name={icon} size={25} style={styles.sliderIcon} />
           <Slider
+            disabled={hsl[item].locked}
             style={styles.slider}
             onValueChange={(value) =>
               handleSetHsl({
@@ -73,7 +81,7 @@ export const HSLInput = () => {
             thumbTintColor={theme.palette.text}
             minimumTrackTintColor={theme.palette.text}
             maximumTrackTintColor={theme.palette.text}
-            value={hsl[item].value}
+            value={innerHsl[item].value}
             minimumValue={0}
             maximumValue={item === 'h' ? 360 : 100}
           />
