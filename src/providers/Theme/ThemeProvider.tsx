@@ -1,4 +1,5 @@
 import { getItem, setItem } from 'helpers/localStorage';
+import { useDidUpdateEffect } from 'hooks/useDidUpdateEffect';
 import { getRandomInt } from 'providers/Theme/helpers/getRandomInt';
 import React, { useEffect, useState } from 'react';
 import { Appearance, StatusBar } from 'react-native';
@@ -33,7 +34,7 @@ export const ThemeProvider: React.FC<Props> = ({
     })();
   }, []);
 
-  useEffect(() => {
+  useDidUpdateEffect(() => {
     setItem('hsl', hsl);
 
     const { h, s, l } = hsl;

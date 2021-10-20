@@ -9,7 +9,7 @@ export const useMounted = () => {
     return () => {
       mounted.current = false;
     };
-  });
+  }, []);
 
   return mounted;
 };
