@@ -1,3 +1,4 @@
+import { getItem, setItem } from 'helpers/localStorage';
 import { getRandomInt } from 'providers/Theme/helpers/getRandomInt';
 import React, { useEffect, useState } from 'react';
 import { Appearance, StatusBar } from 'react-native';
@@ -25,6 +26,16 @@ export const ThemeProvider: React.FC<Props> = ({
   });
 
   useEffect(() => {
+    (async () => {
+      const hsl = await getItem<HSLValue>('hsl');
+
+      hsl && setHsl(hsl);
+    })();
+  }, []);
+
+  useEffect(() => {
+    setItem('hsl', hsl);
+
     const { h, s, l } = hsl;
 
     const color = `hsl(${h.value}, ${s.value}%, ${l.value}%)`;

@@ -42,44 +42,48 @@ export const ColorHarmony: FC = () => {
 
   return harmonies ? (
     <View>
-      <FlatList
-        contentContainerStyle={styles.flatList}
-        keyExtractor={(item) => `${item}Tab`}
-        showsHorizontalScrollIndicator={false}
-        data={availableHarmonies}
-        horizontal
-        renderItem={({ item }) => (
-          <Button
-            onPress={() => setActiveHarmony(item)}
-            title={messages[item]}
-            color="text"
-            variant={activeHarmony === item ? 'filled' : 'outlined'}
-          />
-        )}
-      />
-      <FlatList
-        contentContainerStyle={styles.flatList}
-        horizontal
-        keyExtractor={({ h, s, l }, index) =>
-          `${h}-${s}-${l}-${index}-harmony-color`
-        }
-        data={[hsl, ...harmonies[activeHarmony]]}
-        renderItem={({ item: { h, s, l } }) => (
-          <TouchableOpacity
-            onPress={() =>
-              handleSetHsl({
-                h: { value: getPositiveHue(h), locked: _hsl.h.locked },
-                s: { value: s, locked: _hsl.s.locked },
-                l: { value: l, locked: _hsl.l.locked },
-              })
-            }
-            style={[
-              styles.color,
-              { backgroundColor: `hsl(${h}, ${s}%, ${l}%)` },
-            ]}
-          />
-        )}
-      />
+      <TouchableOpacity activeOpacity={1}>
+        <FlatList
+          contentContainerStyle={styles.flatList}
+          keyExtractor={(item) => `${item}Tab`}
+          showsHorizontalScrollIndicator={false}
+          data={availableHarmonies}
+          horizontal
+          renderItem={({ item }) => (
+            <Button
+              onPress={() => setActiveHarmony(item)}
+              title={messages[item]}
+              color="text"
+              variant={activeHarmony === item ? 'filled' : 'outlined'}
+            />
+          )}
+        />
+      </TouchableOpacity>
+      <TouchableOpacity activeOpacity={1}>
+        <FlatList
+          contentContainerStyle={styles.flatList}
+          horizontal
+          keyExtractor={({ h, s, l }, index) =>
+            `${h}-${s}-${l}-${index}-harmony-color`
+          }
+          data={[hsl, ...harmonies[activeHarmony]]}
+          renderItem={({ item: { h, s, l } }) => (
+            <TouchableOpacity
+              onPress={() =>
+                handleSetHsl({
+                  h: { value: getPositiveHue(h), locked: _hsl.h.locked },
+                  s: { value: s, locked: _hsl.s.locked },
+                  l: { value: l, locked: _hsl.l.locked },
+                })
+              }
+              style={[
+                styles.color,
+                { backgroundColor: `hsl(${h}, ${s}%, ${l}%)` },
+              ]}
+            />
+          )}
+        />
+      </TouchableOpacity>
     </View>
   ) : null;
 };
