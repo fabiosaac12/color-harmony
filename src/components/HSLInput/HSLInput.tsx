@@ -1,7 +1,6 @@
-import { Text } from 'components/Text';
 import { useTheme } from 'providers/Theme';
 import React, { useEffect, useState } from 'react';
-import { TouchableOpacity, View } from 'react-native';
+import { TextInput, TouchableOpacity, View } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Slider from '@react-native-community/slider';
 import { useStyles } from './HSLInputStyle';
@@ -65,7 +64,35 @@ export const HSLInput = () => {
             style={styles.button}
           >
             <Icon name={value.icon} size={40} style={styles.buttonIcon} />
-            <Text variant="button">{value.value}</Text>
+            <TextInput
+              value={`${value.value}`}
+              onChangeText={(text) => {
+                const numberValue = text === '' ? 0 : parseInt(text);
+                const verifiedNumberValue =
+                  numberValue > (value.name === 'h' ? 360 : 100)
+                    ? value.name === 'h'
+                      ? 360
+                      : 100
+                    : numberValue;
+
+                setInnerHsl((innerHsl) => ({
+                  ...innerHsl,
+                  [value.name]: {
+                    value: verifiedNumberValue,
+                    locked: !value.locked,
+                  },
+                }));
+
+                handleSetHsl({
+                  [value.name]: {
+                    value: verifiedNumberValue,
+                    locked: value.locked,
+                  },
+                });
+              }}
+              keyboardType="number-pad"
+              style={styles.input}
+            />
             <Icon
               name={value.locked ? 'lock-closed' : 'lock-open-outline'}
               style={styles.padLock}

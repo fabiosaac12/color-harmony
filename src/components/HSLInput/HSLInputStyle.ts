@@ -38,5 +38,11 @@ export const useStyles = makeStyles((theme) =>
       top: 0,
       right: 0,
     },
+    input: {
+      color: theme.palette.text,
+      ...theme.text.button,
+      textAlign: 'center',
+      paddingVertical: 0,
+    },
   }),
 );
