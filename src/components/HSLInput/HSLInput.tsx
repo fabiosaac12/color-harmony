@@ -1,5 +1,5 @@
 import { Text } from 'components/Text';
-import { themes, useTheme } from 'providers/Theme';
+import { useTheme } from 'providers/Theme';
 import React, { useEffect, useState } from 'react';
 import { TouchableOpacity, View } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -8,7 +8,7 @@ import { useStyles } from './HSLInputStyle';
 import { Values } from './models/Values';
 import { HSLLetters } from './models/HSLLetters';
 import { HSLValue } from 'providers/Theme/models/HSLValue';
-import { useDidUpdateEffect } from 'hooks/useDidUpdateEffect';
+import { getItem } from 'helpers/localStorage';
 
 const sliders: { item: HSLLetters; icon: string }[] = [
   {
@@ -31,6 +31,14 @@ export const HSLInput = () => {
 
   const { hsl, handleSetHsl, addGenerateThemeCallback } = useTheme();
   const [innerHsl, setInnerHsl] = useState<HSLValue>(hsl);
+
+  useEffect(() => {
+    (async () => {
+      const hsl = await getItem<HSLValue>('hsl');
+
+      hsl && setInnerHsl(hsl);
+    })();
+  }, []);
 
   useEffect(() => {
     addGenerateThemeCallback((hsl) => setInnerHsl(hsl));
