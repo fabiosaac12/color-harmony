@@ -4,20 +4,18 @@ import { useStyles } from './ButtonStyles';
 import { Text } from '../Text/Text';
 
 interface Props extends TouchableOpacityProps {
-  color?: 'primary' | 'text' | 'danger' | 'success';
   title?: string;
   variant?: 'outlined' | 'filled';
 }
 
 export const Button: React.FC<Props> = ({
-  color = 'primary',
   title,
   style,
   children,
   variant = 'filled',
   ...props
 }) => {
-  const styles = useStyles({ variant, color, disabled: !!props.disabled });
+  const styles = useStyles({ variant, disabled: !!props.disabled });
 
   return (
     <TouchableOpacity

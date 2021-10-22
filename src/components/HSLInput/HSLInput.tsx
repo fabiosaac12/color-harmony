@@ -8,6 +8,7 @@ import { Values } from './models/Values';
 import { HSLLetters } from './models/HSLLetters';
 import { HSLValue } from 'providers/Theme/models/HSLValue';
 import { getItem } from 'helpers/localStorage';
+import { OutputColors } from 'components/OutputColors';
 
 const sliders: { item: HSLLetters; icon: string }[] = [
   {
@@ -122,6 +123,8 @@ export const HSLInput = () => {
           />
         </View>
       ))}
+
+      <OutputColors />
     </View>
   );
 };

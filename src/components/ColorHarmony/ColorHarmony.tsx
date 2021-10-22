@@ -53,7 +53,6 @@ export const ColorHarmony: FC = () => {
             <Button
               onPress={() => setActiveHarmony(item)}
               title={messages[item]}
-              color="text"
               variant={activeHarmony === item ? 'filled' : 'outlined'}
             />
           )}
@@ -61,6 +60,7 @@ export const ColorHarmony: FC = () => {
       </TouchableOpacity>
       <TouchableOpacity activeOpacity={1}>
         <FlatList
+          showsHorizontalScrollIndicator={false}
           contentContainerStyle={styles.flatList}
           horizontal
           keyExtractor={({ h, s, l }, index) =>
