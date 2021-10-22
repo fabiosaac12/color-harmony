@@ -12,8 +12,10 @@ import { RGB } from './models/RGB';
 import { useStyles } from './OutputColorsStyles';
 import { useModal } from 'providers/Modal';
 import { InfoModal } from 'components/InfoModal';
+import { useMessages } from './OutputColorsMessages';
 
 export const OutputColors = () => {
+  const messages = useMessages();
   const styles = useStyles();
   const modal = useModal();
   const { hsl: _hsl } = useTheme();
@@ -41,8 +43,8 @@ export const OutputColors = () => {
     modal.handleOpen({
       content: (
         <InfoModal
-          buttonText="Perfect!"
-          title={`"${text}" successfully copied to clipboard`}
+          buttonText={messages.perfect}
+          title={`"${text}" ${messages.copied}`}
         />
       ),
     });

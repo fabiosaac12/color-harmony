@@ -7,7 +7,7 @@ export const useStyles = makeStyles((theme) =>
       flex: 1,
       justifyContent: 'flex-end',
       alignItems: 'center',
-      backgroundColor: 'rgba(0, 0, 0, 0.3)',
+      backgroundColor: 'rgba(0, 0, 0, 0.6)',
     },
     container: {
       backgroundColor: theme.palette.background,
