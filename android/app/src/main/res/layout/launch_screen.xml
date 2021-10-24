@@ -13,18 +13,12 @@
 
     </FrameLayout>
 
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <FrameLayout
+        android:layout_width="140dp"
+        android:layout_height="152dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:includeFontPadding="false"
-        android:letterSpacing="0.2"
-        android:text="@string/creator"
-        android:textColor="@color/ic_launcher_background"
-        android:textSize="20sp"
-        android:textStyle="normal"
-        android:translationY="-100dp" />
+        android:background="@drawable/fabiosaac"
+        android:translationY="-32dp"></FrameLayout>
 
 </RelativeLayout>
