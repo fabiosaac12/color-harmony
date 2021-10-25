@@ -8,6 +8,7 @@ export interface ThemeContextProps {
   hsl: HSLValue;
   handleSetHsl: ({ h, s, l }: Partial<HSLValue>) => HSLValue;
   addGenerateThemeCallback: (callback: (hsl: HSLValue) => void) => void;
+  runGenerateThemeCallbacks: (newHsl: HSLValue) => void;
 }
 
 export const ThemeContext = createContext<ThemeContextProps>(

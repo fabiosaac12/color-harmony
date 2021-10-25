@@ -40,10 +40,11 @@ export const ThemeProvider: React.FC<Props> = ({
     return newHsl;
   };
 
-  const { addGenerateThemeCallback, generateTheme } = useThemeGenerator({
-    handleSetHsl,
-    hsl,
-  });
+  const { addGenerateThemeCallback, generateTheme, runGenerateThemeCallbacks } =
+    useThemeGenerator({
+      handleSetHsl,
+      hsl,
+    });
 
   useEffect(() => {
     (async () => {
@@ -80,6 +81,7 @@ export const ThemeProvider: React.FC<Props> = ({
     handleSetHsl,
     hsl,
     addGenerateThemeCallback,
+    runGenerateThemeCallbacks,
   };
 
   return (

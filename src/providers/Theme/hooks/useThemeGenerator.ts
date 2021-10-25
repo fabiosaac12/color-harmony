@@ -12,6 +12,12 @@ export const useThemeGenerator = ({ hsl, handleSetHsl }: Props) => {
     ((hsl: HSLValue) => void)[]
   >([]);
 
+  const runGenerateThemeCallbacks = (newHsl: HSLValue) => {
+    for (let callback of generateThemeCallbacks) {
+      callback(newHsl);
+    }
+  };
+
   const addGenerateThemeCallback = (callback: (hsl: HSLValue) => void) =>
     setGenerateThemeCallbacks((callbacks) => [...callbacks, callback]);
 
@@ -26,10 +32,8 @@ export const useThemeGenerator = ({ hsl, handleSetHsl }: Props) => {
       l: hsl.l.locked ? undefined : { value: l, locked: false },
     });
 
-    for (let callback of generateThemeCallbacks) {
-      callback(newHsl);
-    }
+    runGenerateThemeCallbacks(newHsl);
   };
 
-  return { addGenerateThemeCallback, generateTheme };
+  return { addGenerateThemeCallback, generateTheme, runGenerateThemeCallbacks };
 };

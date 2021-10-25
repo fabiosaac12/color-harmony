@@ -24,7 +24,7 @@ const availableHarmonies: AvailableHarmonies[] = [
 export const ColorHarmony: FC = () => {
   const messages = useMessages();
   const styles = useStyles();
-  const { hsl: _hsl, handleSetHsl } = useTheme();
+  const { hsl: _hsl, handleSetHsl, runGenerateThemeCallbacks } = useTheme();
   const [harmonies, setHarmonies] = useState<Harmonies>();
   const [activeHarmony, setActiveHarmony] =
     useState<AvailableHarmonies>('analogous');
@@ -69,13 +69,16 @@ export const ColorHarmony: FC = () => {
           data={[hsl, ...harmonies[activeHarmony]]}
           renderItem={({ item: { h, s, l } }) => (
             <TouchableOpacity
-              onPress={() =>
-                handleSetHsl({
+              onPress={() => {
+                const newHsl = {
                   h: { value: getPositiveHue(h), locked: _hsl.h.locked },
                   s: { value: s, locked: _hsl.s.locked },
                   l: { value: l, locked: _hsl.l.locked },
-                })
-              }
+                };
+
+                handleSetHsl(newHsl);
+                runGenerateThemeCallbacks(newHsl);
+              }}
               style={[
                 styles.color,
                 { backgroundColor: `hsl(${h}, ${s}%, ${l}%)` },
