@@ -91,6 +91,7 @@ export const HSLInput = () => {
                   },
                 });
               }}
+              editable={!value.locked}
               keyboardType="number-pad"
               style={styles.input}
             />
